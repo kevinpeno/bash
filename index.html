@@ -14,21 +14,54 @@
 
 		.grid.n {
 			fill: hsl(0, 0%, 70%);
+			background-color: hsl(0, 0%, 70%);
 		}
 		.grid.ne {
 			fill: hsl(51, 100%, 70%);
+			background-color: hsl(51, 100%, 70%);
 		}
 		.grid.se {
 			fill: hsl(120, 100%, 70%);
+			background-color: hsl(120, 100%, 70%);
 		}
 		.grid.s {
 			fill: hsl(0, 100%, 70%);
+			background-color: hsl(0, 100%, 70%);
 		}
 		.grid.sw {
 			fill: hsl(260, 100%, 70%);
+			background-color: hsl(260, 100%, 70%);
 		}
 		.grid.nw {
 			fill: hsl(180, 100%, 70%);
+			background-color: hsl(180, 100%, 70%);
+		}
+
+		.legend {
+			position: absolute;
+			top: 2ex;
+			left: 2ex;
+		}
+
+		.legend, .legend li {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			line-height: 0;
+		}
+
+		.legend li {
+			border: 2px solid transparent;
+		}
+
+		.legend li.active {
+			border-color: #333;
+		}
+
+		.legend span {
+			display: inline-block;
+			width: 5ex;
+			height: 5ex;
 		}
 	</style>
 <style type="text/css"></style></head>
@@ -1512,5 +1545,58 @@
 		<polygon class="grid se" id="3048" points="5868,3491.81442805886 5832.00000007461,3554.16825708826 5760.00000014922,3554.16825721749 5724,3491.81442831732 5759.99999970155,3429.46059915869 5831.99999962694,3429.46059877099"></polygon>
 		<polygon class="grid se" id="3049" points="5868,3616.52208620382 5832.00000007461,3678.87591523322 5760.00000014922,3678.87591536245 5724,3616.52208646228 5759.99999970155,3554.16825730365 5831.99999962694,3554.16825691595"></polygon>
 	</svg>
+	<ul class="legend">
+		<li><span class="grid n" data-color="n"></span></li>
+		<li><span class="grid ne" data-color="ne"></span></li>
+		<li><span class="grid se" data-color="se"></span></li>
+		<li><span class="grid s" data-color="s"></span></li>
+		<li><span class="grid sw" data-color="sw"></span></li>
+		<li><span class="grid nw" data-color="nw"></span></li>
+		<li class=""><span class="grid c" data-color="c"></span></li>
+	</ul>
+	<script type="text/javascript">
+		var isMouseDown = false;
+		document.addEventListener('mousedown', function(e) {
+			isMouseDown = true;
+		});
+
+		document.addEventListener('mouseup', function(e) {
+			isMouseDown = false;
+		});
+
+		var colors = document.querySelectorAll('.legend li span');
+		var currentColor = null;
+
+		[].forEach.call(colors, function(node){
+			node.addEventListener("click", function(e){
+				var active = document.querySelector('.legend li.active');
+
+				if( active )
+					document.querySelector('.legend li.active').classList.remove('active');
+
+				if( this.dataset.color === currentColor ) {
+					currentColor = null;
+				}
+				else {
+					this.parentElement.classList.add('active');
+					currentColor = this.dataset.color;
+				}
+			});
+		});
+
+		var polys = document.getElementsByTagName('polygon');
+
+		[].forEach.call(polys, function(node){
+			node.addEventListener("mouseover", function(e){
+				if( isMouseDown ) {
+					this.setAttribute('class', 'grid');
+
+					if( currentColor ) {
+						this.classList.add(currentColor);
+					}
+				}
+			});
+		}, true);
+	</script>
 </body>
 </html>
