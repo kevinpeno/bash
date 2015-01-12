@@ -5,7 +5,10 @@ Feature: Create a card
 	* an attack value
 	* a defense value
 	* a movement value
-	* attack, defense, and movement values cannot be less than 0
+	* a total point value accesible that is the sum of attack, defense, and movement values
+
+	Futher:
+	* attack, defense, and movement values should not be less than 0
 
 	Scenario: Creating a card without a name
 		When I try to create a card without a name
