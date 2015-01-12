@@ -1,0 +1,25 @@
+{
+  "name": "bash",
+  "version": "0.0.1",
+  "description": "strategy game",
+  "main": "",
+  "dependencies": {
+    "systemjs": "^0.11.1"
+  },
+  "devDependencies": {
+    "cucumber": "^0.4.7"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/cucumber-js -f pretty"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kevinpeno/bash.git"
+  },
+  "author": "Kevin Peno",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/kevinpeno/bash/issues"
+  },
+  "homepage": "https://github.com/kevinpeno/bash"
+}
