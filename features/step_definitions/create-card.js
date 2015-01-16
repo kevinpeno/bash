@@ -26,52 +26,65 @@ module.exports = function(){
 	})
 
 	this.Given(/^I created a card with the name of "([^"]*)"$/, function (arg1, callback) {
-		// Write code here that turns the phrase above into concrete actions
-		callback.pending()
+		System.import('./src/card').then(function(Card){
+			try {
+				this.card = Card.create(arg1);
+				callback()
+			} catch(e) {
+				callback.fail(e.message)
+			}
+		})
+		.catch(function(err){
+			callback.fail(err)
+		})
 	})
 
-	this.When(/^I access the card$/, function (callback) {
-		// Write code here that turns the phrase above into concrete actions
-		callback.pending()
-	})
+	this.When(/^I access the card's properties$/, function (callback) {
+		callback();
+	});
 
 	this.Then(/^the card should have a unique identifier assigned$/, function (callback) {
-		// Write code here that turns the phrase above into concrete actions
-		callback.pending()
-	})
+		if( !card.id )
+			callback.fail("Card doesn't have a unique id")
+		else
+			callback()
+	});
 
 	this.Then(/^a name equal to "([^"]*)"$/, function (arg1, callback) {
-		// Write code here that turns the phrase above into concrete actions
-		callback.pending()
-	})
+		if( card.name !== arg1)
+			callback.fail('Card name is ' + card.name + ' when it should equal ' + arg1)
+		else
+			callback()
+	});
 
-	this.Then(/^an attack value equal to "([^"]*)"$/, function (arg1, callback) {
-		// Write code here that turns the phrase above into concrete actions
-		callback.pending()
-	})
+	this.Then(/^an toughness value equal to (\d+)$/, function (arg1, callback) {
+		if( card.toughness !== 1)
+			callback.fail('Card toughness does not default to 1')
+		else
+			callback()
+	});
 
-	this.Then(/^an defense value equal to "([^"]*)"$/, function (arg1, callback) {
-		// Write code here that turns the phrase above into concrete actions
-		callback.pending()
-	})
+	this.Then(/^an supplies value equal to (\d+)$/, function (arg1, callback) {
+		if( card.supplies !== 1)
+			callback.fail('Card supplies does not default to 1')
+		else
+			callback()
+	});
 
-	this.Then(/^an movement value equal to "([^"]*)"$/, function (arg1, callback) {
-		// Write code here that turns the phrase above into concrete actions
-		callback.pending()
-	})
+	this.Then(/^an empty set of abilities$/, function (callback) {
+		if( !(card.abilities instanceof Array) )
+			callback.fail('Card needs to have an empty abilities property')
+		else
+			callback()
+	});
 
-	this.When(/^I set the attack value to \-(\d+)$/, function (arg1, callback) {
+	this.When(/^I set the toughness value to (\d+)$/, function (arg1, callback) {
 		// Write code here that turns the phrase above into concrete actions
-		callback.pending()
-	})
+		callback.pending();
+	});
 
-	this.When(/^I set the defense value to \-(\d+)$/, function (arg1, callback) {
+	this.When(/^I set the supplies value to \-(\d+)$/, function (arg1, callback) {
 		// Write code here that turns the phrase above into concrete actions
-		callback.pending()
-	})
-
-	this.When(/^I set the movement value to \-(\d+)$/, function (arg1, callback) {
-		// Write code here that turns the phrase above into concrete actions
-		callback.pending()
-	})
+		callback.pending();
+	});
 }
