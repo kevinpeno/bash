@@ -1,15 +1,17 @@
-export var __useDefault = true
-var uuid = require('uuid');
+class Deck extends Set {
+	constructor(...args) {
+		super(...args)
+	}
 
-class Deck extends Map {
-	constructor(it) {
-		super(it)
-		this.id = uuid();
+	get level() {
+		let level = 0
+
+		for( let card of this ) {
+			level += card.level
+		}
+
+		return level
 	}
 }
 
-export default {
-	create: function() {
-		return new Deck()
-	}
-}
+export default Deck

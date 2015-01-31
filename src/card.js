@@ -1,14 +1,45 @@
-export var __useDefault = true
-var uuid = require('uuid');
-
 class Card {
 	constructor() {
-		this.id = uuid();
+		this.abilities = new Abilities();
+	}
+
+	get level() {
+		let level = 0;
+
+		for( let [name, value] of this.abilities ) {
+			level += value.level
+		}
+
+		return level
 	}
 }
 
-export default {
-	create: function() {
-		return new Card()
+class Abilities extends Map {
+	add( name, options={} ) {
+		let ability = new Ability(options);
+
+		this.set(name, ability)
+		return ability
 	}
 }
+
+export class Ability {
+	constructor( options={} ) {
+		this.level = options.level || 1
+	}
+
+	set level( value ) {
+		let level = parseInt( value, 10 )
+
+		if( level < 1 )
+			throw new RangeError('Level cannot be less than 1')
+		else
+			this._level = level
+	}
+
+	get level() {
+		return this._level
+	}
+}
+
+export default Card

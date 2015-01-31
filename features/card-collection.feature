@@ -1,49 +1,27 @@
 Feature: Card collection
 In order to create a collection of cards
-As a System
-I need to have a way to manage that collection
-
-	Scenario: Creating a card
-		When I create a new card
-		Then a unique card should exist
-
-	Scenario: Saving a card
-		Given I have a card
-		When I save the card
-		Then I should be able to access the card later with those changes applied
+As a User
+I need to manage that collection
 
 	Scenario: Setting the name of the card
-		Given I have a card
-		When I set the name of the card to "Test Character"
-		Then the name of the card should be "Test Character"
+		Given I created a card
+		When I name the card "Epic Awesome Card"
+		Then the name of the card should set to "Epic Awesome Card"
 
-	Scenario: Creating a reusable deck of cards
-		Given I have some cards that meet some strategic goal
-		When I create a deck with those cards
-		Then I will have a unique deck to access later
-
-	Scenario: Naming a reusable deck of cards
-		Given I have some cards that meet some strategic goal
-			And I create a deck with those cards
-		When I set the name of the deck to "Test deck"
-		Then the name should equal to "Test deck"
+	Scenario: Naming a deck of cards
+		Given I created a deck
+		When I set the name of the deck to "Undefeatable Deck"
+		Then the name of the deck should be set to "Undefeatable Deck"
 
 	Scenario: Adding a card to an existing deck
-		Given I have some cards that meet some strategic goal
-			And I create a deck with those cards
-			And I have a card
+		Given I created a deck
+			And I created a card
 		When I add the card to the deck
-		Then it will be available as part of the deck in the future
+		Then the card should be included in the deck
 
 	Scenario: Removing a card from an existing deck
-		Given I have some cards that meet some strategic goal
-			And I create a deck with those cards
-			And I have a card I want to remove
-		When I remove that card
-		Then it will not be available as part of the deck in the future
-
-	Scenario: Saving a deck
-		Given I have some cards that meet some strategic goal
-			And I create a deck with those cards
-		When I save the deck
-		Then I should be able to access the deck later with those changes applied
+		Given I created a deck
+			And I created a card
+			And I added the card to the deck
+		When I remove the card from the deck
+		Then the card should no longer be included in the deck
