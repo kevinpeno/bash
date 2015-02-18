@@ -1,6 +1,9 @@
-class Card {
+export default class Card {
 	constructor() {
 		this.abilities = new Abilities();
+		this.actions = {
+			total: 0
+		}
 	}
 
 	get level() {
@@ -9,6 +12,8 @@ class Card {
 		for( let [name, value] of this.abilities ) {
 			level += value.level
 		}
+
+		level += this.actions.total
 
 		return level
 	}
@@ -41,5 +46,3 @@ export class Ability {
 		return this._level
 	}
 }
-
-export default Card

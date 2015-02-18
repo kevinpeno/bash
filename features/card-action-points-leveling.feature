@@ -4,12 +4,12 @@ As a User
 I need be able to tell how changing my action points on a card alter the level of that card
 
 	Scenario: Adding action points
-		Given I have a card
-		When I upgrade my action point total by 1
+		Given I created a card
+		When I increase the action point total by 1
 		Then the card should have a level of 1
 
 	Scenario: Removing action points
-		Given I have a card
-			And I upgraded my action point total by 1
-		When I downgrade my action point total by 1
-		Then the card should have a level of 1
+		Given I created a card
+			And I increased the action point total by 1
+		When I decrease the action point total by 1
+		Then the card should have a level of 0
