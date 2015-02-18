@@ -1,6 +1,7 @@
 require("6to5/register")
 var assert = require('assert')
 var Card = require('../../src/card').default
+var CardAbility = require('../../src/card').Ability
 
 module.exports = function() {
 	this.Given(/^I created a card$/, function (next) {
@@ -9,7 +10,7 @@ module.exports = function() {
 	})
 
 	this.Given(/^I added the ability to "([^"]*)" to the card$/, function (name, next) {
-		this.card.abilities.add(name)
+		this.card.abilities.set(name, new CardAbility())
 		next()
 	})
 
@@ -30,7 +31,7 @@ module.exports = function() {
 	})
 
 	this.When(/^I add the ability to "([^"]*)" to the card$/, function (name, next) {
-		this.card.abilities.add(name)
+		this.card.abilities.set(name, new CardAbility())
 		next()
 	})
 
@@ -119,7 +120,7 @@ module.exports = function() {
 		next()
 	})
 
-	this.Then(/^the card should have an available action point total of (\d+)$/, function (amount, next) {
+	this.Then(/^the card should have (\d+) available action points$/, function (amount, next) {
 		assert.equal(
 			this.card.actions.total,
 			parseInt(amount,10)

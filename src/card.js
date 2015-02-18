@@ -1,6 +1,6 @@
 export default class Card {
 	constructor() {
-		this.abilities = new Abilities();
+		this.abilities = new Map();
 		this.actions = {
 			total: 0
 		}
@@ -16,15 +16,6 @@ export default class Card {
 		level += this.actions.total
 
 		return level
-	}
-}
-
-class Abilities extends Map {
-	add( name, options={} ) {
-		let ability = new Ability(options);
-
-		this.set(name, ability)
-		return ability
 	}
 }
 
