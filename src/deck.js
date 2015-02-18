@@ -1,4 +1,4 @@
-class Deck extends Set {
+export default class Deck extends Set {
 	constructor(...args) {
 		super(...args)
 	}
@@ -14,4 +14,5 @@ class Deck extends Set {
 	}
 }
 
-export default Deck
+
+export var __forcingDefault // Makes sure .default is required for some reason

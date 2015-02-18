@@ -1,9 +1,9 @@
 require("6to5/register")
 var assert = require('assert')
+var Deck = require('../../src/deck').default
 
 module.exports = function(){
 	this.Given(/^I created a deck$/, function (next) {
-		var Deck = require('../../src/deck')
 		this.deck = new Deck()
 		next()
 	})
