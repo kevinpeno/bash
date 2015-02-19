@@ -1,8 +1,4 @@
 export default class Deck extends Set {
-	constructor(...args) {
-		super(...args)
-	}
-
 	get level() {
 		let level = 0
 

@@ -26,7 +26,7 @@ I need to manage a card's unique capabilities
 		Given I created a card
 			And I added the ability to "jump" to the card
 		When I downgrade the ability to "jump" by 1 level
-		Then the ability to "jump" should no longer be attached to the card
+		Then the "jump" ability should have a level of 0
 
 	Scenario: Removing an ability
 		Given I created a card

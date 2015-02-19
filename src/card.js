@@ -1,16 +1,31 @@
+let privates = new WeakMap
+
 export default class Card {
 	constructor() {
-		this.abilities = new Map();
-		this.actions = {
-			total: 0
-		}
+		privates.set(
+			this,
+			{
+				abilities: new Map(),
+				actions: {
+					total: 0
+				}
+			}
+		)
+	}
+
+	get abilities() {
+		return privates.get(this).abilities
+	}
+
+	get actions() {
+		return privates.get(this).actions
 	}
 
 	get level() {
 		let level = 0;
 
-		for( let [name, value] of this.abilities ) {
-			level += value.level
+		for( let [k, v] of this.abilities ) {
+			level += v.level
 		}
 
 		level += this.actions.total
@@ -20,20 +35,7 @@ export default class Card {
 }
 
 export class Ability {
-	constructor( options={} ) {
-		this.level = options.level || 1
-	}
-
-	set level( value ) {
-		let level = parseInt( value, 10 )
-
-		if( level < 1 )
-			throw new RangeError('Level cannot be less than 1')
-		else
-			this._level = level
-	}
-
-	get level() {
-		return this._level
+	constructor() {
+		this.level = 1
 	}
 }
