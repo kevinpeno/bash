@@ -112,12 +112,12 @@ Rule
 	Defines a particular functionality of the game
 
 Action
-	A rule that is triggered by some form of interaction
+	A rule that is triggered by some form of user interaction
 
 	ex. Move, Attack, Defend
 
 Ruleset
-	Defines a combination of rules and actions that are designed to work together
+	Defines a combination of rules and/or actions that are designed to work together
 
 Capability
 	Term to describe a ruleset being applied to a card

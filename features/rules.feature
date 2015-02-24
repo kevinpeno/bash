@@ -1,17 +1,21 @@
 Feature: Rules
-In order to define functionality of the game
-As a Game designer
-I need a way to attach rules to game constructs
+In order to describe the functionality of my game
+As a Game Designer
+I need a way to define rules and attach them to game constructs
 
-	# Scenario: Add a card
-	# 	Given I created a deck
-	# 		And I created a card
-	# 	When I add the card to the deck
-	# 	Then the deck should have a level equal to the level of all cards
+	Scenario: Rules should have a way to be triggered
+		Given I create a rule
+		When I attach an empty trigger to it
+		Then the result should be successful
 
-	# Scenario: Remove a card
-	# 	Given I created a deck
-	# 		And I created a card
-	# 		And I added the card to the deck
-	# 	When I remove the card from the deck
-	# 	Then the deck should have a level equal to the level of all cards
+	Scenario: Rules should be triggered against targets
+		Given I create a rule
+		When I add an empty trigger to it
+			And I trigger it on a target
+		Then the result should be successful
+
+	Scenario: Rules should have a way to fail on trigger
+		Given I create a rule
+		When I define a trigger that will fail
+			And I trigger it
+		Then then an exception should be thrown
