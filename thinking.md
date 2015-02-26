@@ -122,6 +122,125 @@ Ruleset
 Capability
 	Term to describe a ruleset being applied to a card
 
+==========================================================================
+Attack [target, Card] ->
+	modify damage (Card)(damage)
+	modify damage (target)(damage)
+	validate damage (damage)
+	take damage (target)(damage)
 
+Attack [target, Card] ->
+	modify damage (Card)(damage)
+	take damage (target)(damage)
+		modify damage (damage)
+		apply damage (damage)
 
+Card->Attack(target)
+	target->take damage( this->get damage() )
+
+Card->trigger( 'Attack', target ) {
+	target->trigger( 'take damage', this->get damage() )
+}
+==========================================================================
+Format:
+	Event Name [...targets](...arguments) {
+		//describe change to arguments
+	}
+
+Definitions:
+	...targets = callback should only trigger on Event Name when targets are equal to definition
+	<- = describes setting event to be listened for
+	-> = describes event being triggered
+
+/**
+	User initiated event definitions
+**/
+
+Attack (victum, aggressor) {
+	damage: 0
+	-> set damage [aggressor]( damage )
+	-> set health [victum]( damage )
+}
+
+Target (victum, aggressor) {
+	<- Attack [target, aggressor] {
+		<- set damage [aggressor](damage) {
+			damage + X
+		}
+	}
+}
+
+Defend (target) {
+	health: 0
+	-> set health [target](data.health) {
+		health + X
+	}
+	<- End of Turn {
+		<- Defend[target] {
+			<- set health [target](data.health) {
+				health - X
+			}
+		}
+		-> Defend(target)
+	}
+}
+
+End of Turn {
+	-> any ()
+}
+
+/**
+	Object Definitions
+**/
+
+AttackingTarget {
+	<- Attack [victum, aggressor] {
+		<- set damage [aggressor]( damage ) {
+			damage + X
+		}
+	}
+}
+
+DefendingTarget {
+	<- Defend [target] {
+		<- set health [target](health) {
+			health + X
+		}
+	}
+}
+
+/**
+	Example flow
+**/
+
+UserD
+	-> Defend [DefendingTarget]
+		-> Defend (DefendingTarget)
+			health: 0
+			-> set health [DefendingTarget](health)
+				DefendingTarget -> health + X
+			health: 0 + 1X
+
+UserA
+	-> Target [DefendingTarget, AttackingTarget]
+	-> Attack [DefendingTarget, AttackingTarget]
+		-> Attack (DefendingTarget, AttackingTarget)
+			damage: 0
+			-> set damage [AttackingTarget](damage)
+					Target -> damage + X
+					AttackingTarget -> damage + X
+			damage: 0 + 2X
+			-> set health [DefendingTarget](damage)
+					DefendingTarget -> health - X
+
+Game
+	-> End of Turn
+		-> End of Turn ()
+			-> Defend(DefendingTarget)
+				health: 0
+				-> set health [DefendingTarget](health)
+					DefendingTarget -> health - X
+				health: -1X
+
+========================================================================
 
