@@ -1,6 +1,4 @@
-"use strict"
-
-class Deck extends Set {
+export default class Deck extends Set {
 	constructor(cards) {
 		super(cards)
 	}

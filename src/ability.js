@@ -1,27 +1,23 @@
-"use strict"
-
-let defaultOptions = {
+const defaultOptions = {
 	"level": 1
 }
 
-class Ability {
+const props = new WeakMap()
+
+export default class Ability {
 	constructor( options ) {
-		options = Object.assign(defaultOptions, options)
-
-		this.level = options.level
-	}
-
-	set level( value ) {
-		let level = parseInt( value, 10 )
-
-		if( level < 1 )
-			throw new RangeError('Level cannot be less than 1')
-		else
-			this._level = level
+		props.set(this, Object.assign(defaultOptions, options))
 	}
 
 	get level() {
-		return this._level
+		return props.get(this).level
+	}
+
+	set level( value ) {
+		const level = parseInt( value, 10 )
+		const oldProps = props.get(this)
+
+		props.set(this, Object.assign(oldProps, { level }))
 	}
 }
 
