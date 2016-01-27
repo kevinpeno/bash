@@ -3,14 +3,12 @@
   "version": "0.0.2",
   "description": "strategy game",
   "main": "",
-  "dependencies": {
-    "6to5": "^3.2.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "cucumber": "^0.4.7"
+    "cucumber": "^0.4.9"
   },
   "scripts": {
-    "test": "node_modules/.bin/cucumber-js -i"
+    "test": "cucumber-js -i"
   },
   "repository": {
     "type": "git",

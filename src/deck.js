@@ -1,18 +1,15 @@
-export default class Deck extends Set {
-	constructor(...args) {
-		super(...args)
+"use strict"
+
+class Deck extends Set {
+	constructor(cards) {
+		super(cards)
 	}
 
 	get level() {
-		let level = 0
-
-		for( let card of this ) {
-			level += card.level
-		}
-
-		return level
+		return [].reduce.call(this, (total, card) => {
+			return total + card.level
+		}, 0)
 	}
 }
 
-
-export var __forcingDefault // Makes sure .default is required for some reason
+module.exports = Deck
