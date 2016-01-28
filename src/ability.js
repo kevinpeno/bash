@@ -16,7 +16,7 @@ class Ability {
 	}
 
 	set level( value ) {
-		const level = parseInt( value, 10 )
+		const level = Number.parseInt( value, 10 )
 		const oldProps = props.get(this)
 
 		props.set(this, Object.assign(oldProps, { level }))

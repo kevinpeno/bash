@@ -33,6 +33,22 @@ test("Ability has a level", (t) => {
 	t.end()
 })
 
+test("Ability level can be set when initialized", (t) => {
+	const ability = new Ability({ "level": 1 })
+
+	t.equal(ability.level, 1)
+	t.end()
+})
+
+test("Ability level can be set after initialized", (t) => {
+	const ability = new Ability()
+
+	ability.level = 1
+
+	t.equal(ability.level, 1)
+	t.end()
+})
+
 test("I can add cards to a deck", (t) => {
 	const deck = new Deck()
 	const card = new Card()
@@ -61,6 +77,36 @@ test("I can set an ability on a card", (t) => {
 	card.abilities.set("jump", ability)
 
 	t.equal(card.abilities.size, 1)
+	t.end()
+})
+
+test("I can set multiple abilities on a card", (t) => {
+	const card = new Card()
+	const abilities = new Map()
+	const ability = new Ability()
+
+	abilities.set("jump", ability)
+	abilities.set("skip", ability)
+
+	card.abilities = abilities
+
+	t.equal(card.abilities.size, 2)
+	t.end()
+})
+
+test("When set, card abilities must be a Map", (t) => {
+	const card = new Card()
+	const abilities = []
+
+	try {
+		card.abilities = abilities
+		t.fail("card should only accept Map, sent array")
+	}
+	catch (e) {
+		t.pass()
+	}
+
+	t.equal(card.abilities.size, 0)
 	t.end()
 })
 
