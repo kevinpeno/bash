@@ -1,5 +1,5 @@
 const defaultOptions = {
-	"level": 1
+	"level": 0
 }
 
 const props = new WeakMap()

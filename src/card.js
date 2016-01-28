@@ -1,18 +1,13 @@
 export default class Card {
 	constructor() {
 		this.abilities = new Map()
-		this.actions = {
-			"total": 0
-		}
 	}
 
 	get level() {
-		const abilityLevel = [].reduce.call(
-			this.abilities,
-			(total, ability) => total + ability.level,
-			0
-		)
+		const abilitiesAsArray = [...this.abilities.values()]
 
-		return abilityLevel + this.actions.total
+		return abilitiesAsArray.reduce((total, ability) => {
+			return total + ability.level
+		}, 0)
 	}
 }
