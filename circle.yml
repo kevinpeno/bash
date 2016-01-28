@@ -8,7 +8,7 @@ test:
     # - npm run deps
     - npm outdated --depth 0
     - npm run lint
-    - npm run test:xunit > $CIRCLE_TEST_REPORTS/test_result.xml
+    - npm run test:circleci
     - isparta cover --report text --report html --verbose --dir ${CIRCLE_ARTIFACTS}/coverage test/index.js
     # - npm run build
 
