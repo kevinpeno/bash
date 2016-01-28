@@ -25,7 +25,7 @@
     "build:doc": "doctoc --github --title \"## Contents\" ./",
     "start": "webpack --watch",
     "test": "blue-tape test/*.js",
-    "test:circleci": "blue-tape test/*.js | tap-xunit",
+    "test:xunit": "blue-tape test/*.js | tap-xunit",
     "cov": "npm run cov:clean && npm run cov:generate",
     "cov:clean": "rimraf coverage",
     "cov:generate": "isparta cover --report text --report html test/index.js",
