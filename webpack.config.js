@@ -39,7 +39,6 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['babel?plugins=object-assign'],
         include: path.resolve('./src')
       }
     ]

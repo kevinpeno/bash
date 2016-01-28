@@ -1,6 +1,6 @@
 {
   "name": "bash",
-  "description": "Card gaem library",
+  "description": "Card game library",
   "version": "1.0.0",
   "main": "build/index.js",
   "scripts": {
@@ -13,10 +13,10 @@
     "build:min": "node scripts/buildProduction.js",
     "build:doc": "doctoc --github --title \"## Contents\" ./",
     "start": "webpack --watch",
-    "test": "babel-node test/index.js",
+    "test": "tape test/*.js",
     "cov": "npm run cov:clean && npm run cov:generate",
     "cov:clean": "rimraf coverage",
-    "cov:generate": "babel-node node_modules/.bin/isparta cover --report text --report html test/index.js",
+    "cov:generate": "isparta cover --report text --report html test/index.js",
     "prepublish": "npm run build",
     "validate": "npm run lint && npm run build && npm test",
     "validate-dev": "npm run lint && npm run build && npm test | faucet",
@@ -32,10 +32,6 @@
     "lint"
   ],
   "devDependencies": {
-    "babel": "^5.8.21",
-    "babel-eslint": "^4.0.5",
-    "babel-loader": "^5.3.2",
-    "babel-plugin-object-assign": "^1.2.1",
     "blue-tape": "^0.1.10",
     "dependency-check": "^2.5.0",
     "doctoc": "^0.14.2",

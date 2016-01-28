@@ -1,12 +1,14 @@
-const defaultOptions = {
+"use strict"
+
+const defaults = {
 	"level": 0
 }
 
 const props = new WeakMap()
 
-export default class Ability {
+class Ability {
 	constructor( options ) {
-		props.set(this, Object.assign(defaultOptions, options))
+		props.set(this, Object.assign(defaults, options))
 	}
 
 	get level() {

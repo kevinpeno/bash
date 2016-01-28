@@ -1,7 +1,9 @@
-import test from "blue-tape"
-import Deck from "../src/deck"
-import Card from "../src/card"
-import Ability from "../src/ability"
+"use strict"
+
+const test = require("blue-tape")
+const Deck = require("../src/deck")
+const Card = require("../src/card")
+const Ability = require("../src/ability")
 
 test("Deck has a size equal to it's length", (t) => {
 	const deck = new Deck()
@@ -37,7 +39,18 @@ test("I can add cards to a deck", (t) => {
 
 	deck.add(card)
 
-	t.equal(deck.size, 1)
+	t.equal(deck.length, 1)
+	t.end()
+})
+
+test("I can remove cards from a deck", (t) => {
+	const deck = new Deck()
+	const card = new Card()
+
+	const id = deck.add(card)
+	deck.delete(id)
+
+	t.equal(deck.size, 0)
 	t.end()
 })
 
