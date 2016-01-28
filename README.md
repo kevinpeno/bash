@@ -1,6 +1,6 @@
 # bash [![Circle CI](https://circleci.com/gh/kevinpeno/bash/tree/master.svg?style=svg)](https://circleci.com/gh/kevinpeno/bash/tree/master)
-[![Travis-CI](https://travis-ci.org/kevinpeno/bash.svg)](https://travis-ci.org/kevinpeno/bash)
-
+<!-- [![Travis-CI](https://travis-ci.org/kevinpeno/bash.svg)](https://travis-ci.org/kevinpeno/bash)
+ -->
 Card game library
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
