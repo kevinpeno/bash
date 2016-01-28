@@ -7,10 +7,8 @@ const defaults = {
 const props = new WeakMap()
 
 class Card {
-	constructor( options ) {
-		props.set(this, Object.assign(defaults, options))
-
-		this.abilities = this.abilities
+	constructor() {
+		props.set(this, Object.assign({}, defaults))
 	}
 
 	get level() {
@@ -27,9 +25,8 @@ class Card {
 
 	set abilities(abilities) {
 		if ( abilities instanceof Map ) {
-			const oldProps = props.get(this)
-
-			props.set(this, Object.assign(oldProps, { abilities }))
+			props.get(this).abilities = abilities
+			return abilities
 		}
 		else {
 			throw new TypeError("abilities must be a Map")

@@ -96,17 +96,20 @@ test("I can set multiple abilities on a card", (t) => {
 
 test("When set, card abilities must be a Map", (t) => {
 	const card = new Card()
-	const abilities = []
 
 	try {
-		card.abilities = abilities
-		t.fail("card should only accept Map, sent array")
+		card.abilities = "not a map"
+		t.fail("Card should not accept anything except Map for setting abilities")
 	}
 	catch (e) {
-		t.pass()
+		if (e instanceof TypeError) {
+			t.pass("Card threw TypeError when given something other than Map")
+		}
+		else {
+			t.fail("Card should throw a TypeError if not given a map")
+		}
 	}
 
-	t.equal(card.abilities.size, 0)
 	t.end()
 })
 
@@ -122,6 +125,8 @@ test("Card has a level equal to the level of all abilities", (t) => {
 	const level = 1
 	const card = new Card()
 	const ability = new Ability({ level })
+
+	console.log(card.abilities.values())
 
 	card.abilities.set("jump", ability)
 

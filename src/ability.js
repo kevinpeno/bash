@@ -8,7 +8,7 @@ const props = new WeakMap()
 
 class Ability {
 	constructor( options ) {
-		props.set(this, Object.assign(defaults, options))
+		props.set(this, Object.assign({}, defaults, options))
 	}
 
 	get level() {
@@ -16,10 +16,9 @@ class Ability {
 	}
 
 	set level( value ) {
-		const level = Number.parseInt( value, 10 )
-		const oldProps = props.get(this)
+		props.get(this).level = Number.parseInt( value, 10 )
 
-		props.set(this, Object.assign(oldProps, { level }))
+		return value
 	}
 }
 
