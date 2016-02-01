@@ -1,23 +1,8 @@
 "use strict"
 
 const test = require("blue-tape")
-const Deck = require("../src/deck")
 const Card = require("../src/card")
 const Ability = require("../src/ability")
-
-test("Deck has a size equal to it's length", (t) => {
-	const deck = new Deck()
-
-	t.equal(deck.size, deck.length)
-	t.end()
-})
-
-test("Deck has a level", (t) => {
-	const deck = new Deck()
-
-	t.equal(deck.level, 0)
-	t.end()
-})
 
 test("Card has a level", (t) => {
 	const card = new Card()
@@ -46,27 +31,6 @@ test("Ability level can be set after initialized", (t) => {
 	ability.level = 1
 
 	t.equal(ability.level, 1)
-	t.end()
-})
-
-test("I can add cards to a deck", (t) => {
-	const deck = new Deck()
-	const card = new Card()
-
-	deck.add(card)
-
-	t.equal(deck.length, 1)
-	t.end()
-})
-
-test("I can remove cards from a deck", (t) => {
-	const deck = new Deck()
-	const card = new Card()
-
-	const id = deck.add(card)
-	deck.delete(id)
-
-	t.equal(deck.size, 0)
 	t.end()
 })
 
@@ -113,7 +77,7 @@ test("When set, card abilities must be a Map", (t) => {
 	t.end()
 })
 
-test("I can set the level on an ability on init", (t) => {
+test("I can set the level for an ability on init", (t) => {
 	const level = 1
 	const ability = new Ability({ level })
 
@@ -131,25 +95,5 @@ test("Card has a level equal to the level of all abilities", (t) => {
 	card.abilities.set("jump", ability)
 
 	t.equal(card.level, ability.level)
-	t.end()
-})
-
-test("Deck has a level equal to the level of all cards", (t) => {
-	const level = 1
-	const deck = new Deck()
-	const card = new Card()
-
-	// Add ability with level 1 to bump card level
-	const ability = new Ability({ level })
-
-	card.abilities.set("jump", ability)
-
-	// Add three cards
-	deck.add(card)
-	deck.add(card)
-
-	// remove one card
-
-	t.equal(deck.level, 2)
 	t.end()
 })

@@ -38,11 +38,12 @@
     "deps:extra": "dependency-check ./package.json --extra --no-dev --ignore",
     "precheck": "npm run validate",
     "check": "npm run audit && npm run deps && npm outdated --depth 0",
-    "watch": "watch \"npm run clear && npm run lint -s && npm run cov -s\" test/ src/"
+    "watch": "watch \"npm run clear && npm run lint -s && npm run test -s\" test/ src/"
   },
   "pre-commit": [
     "lint",
-    "test"
+    "test",
+    "cov"
   ],
   "devDependencies": {
     "blue-tape": "^0.1.11",
