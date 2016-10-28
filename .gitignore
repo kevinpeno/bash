@@ -1,5 +1,6 @@
-node_modules
-npm-debug.log
-.jshintrc
-coverage
-build
+/bower_components/
+/node_modules/
+/.pulp-cache/
+/output/
+/.psc*
+/src/.webpack.js
