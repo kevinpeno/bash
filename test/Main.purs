@@ -2,8 +2,15 @@ module Test.Main where
 
 import Prelude
 import Control.Monad.Eff (Eff)
-import Control.Monad.Eff.Console (CONSOLE, log)
+import Node.Process (PROCESS)
+import Control.Monad.Eff.Console (CONSOLE)
+import Test.Spec (describe)
+import Test.Spec.Reporter.Console (consoleReporter)
+import Test.Spec.Runner (run)
 
-main :: forall e. Eff (console :: CONSOLE | e) Unit
-main = do
-  log "You should add some tests."
+import Test.Card (cardSpec)
+
+main :: forall t1.Eff( process :: PROCESS, console :: CONSOLE | t1) Unit
+main = run [consoleReporter] do
+	describe "Bash" do
+		cardSpec
