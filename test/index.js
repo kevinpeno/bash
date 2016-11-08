@@ -1,3 +1,5 @@
+/* global require */
+
 "use strict"
 
 const test = require("blue-tape")
@@ -89,8 +91,6 @@ test("Card has a level equal to the level of all abilities", (t) => {
 	const level = 1
 	const card = new Card()
 	const ability = new Ability({ level })
-
-	console.log(card.abilities.values())
 
 	card.abilities.set("jump", ability)
 
