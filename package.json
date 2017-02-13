@@ -27,7 +27,7 @@
     "audit": "nsp check",
     "precheck": "npm run validate",
     "check": "npm run audit && npm outdated --depth 0",
-    "watch": "watch \"npm run clear && npm run validate\""
+    "watch": "watch \"npm run clear && npm run validate\" src test"
   },
   "pre-commit": [
     "lint",
