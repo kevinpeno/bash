@@ -7,20 +7,18 @@ const defaults = {
 
 const props = new WeakMap()
 
-class Ability {
+class Trait {
 	constructor( options ) {
 		props.set(this, Object.assign({}, defaults, options))
+	}
+
+	get key() {
+		return props.get(this).key
 	}
 
 	get level() {
 		return props.get(this).level
 	}
-
-	set level( value ) {
-		props.get(this).level = Number.parseInt( value, 10 )
-
-		return value
-	}
 }
 
-module.exports = Ability
+module.exports = Trait
